@@ -1,0 +1,22 @@
+{
+  "name": "authentication-flow",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "authorization-code": "npx tsx watch authorization-code-flow/src/index.ts",
+    "build": "npx tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.3",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
