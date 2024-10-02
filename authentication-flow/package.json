@@ -4,9 +4,13 @@
   "main": "index.js",
   "scripts": {
     "authorization-code": "npx tsx watch authorization-code-flow/src/index.ts",
+    "implicit": "cd implicit-flow && npm run dev",
     "build": "npx tsc"
   },
   "keywords": [],
+  "workspaces": [
+    "implicit-flow"
+  ],
   "author": "",
   "license": "ISC",
   "description": "",

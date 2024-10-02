@@ -17,6 +17,18 @@ app.use(
   })
 );
 
+const middlewareIsAuth = (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
+  //@ts-expect-error - type mismatch
+  if (!req.session.user) {
+    return res.redirect("/login");
+  }
+  next();
+};
+
 app.get('/login', (req, res) => {
   const nonce = randomBytes(16).toString("base64")
   const state = randomBytes(16).toString("base64")
@@ -94,5 +106,27 @@ app.get('/callback', async (req, res) => {
   console.log(req.session)
   return res.json(result)
 })
+
+app.get("/logout", (req, res) => {
+  const logoutParams = new URLSearchParams({
+    //client_id: "fullcycle-client",
+    //@ts-expect-error
+    id_token_hint: req.session.id_token,
+    post_logout_redirect_uri: "http://localhost:3000/login",
+  });
+
+  req.session.destroy((err) => {
+    console.error(err);
+  });
+
+  const url = `http://localhost:8080/realms/fullcycle-realm/protocol/openid-connect/logout?${logoutParams.toString()}`;
+  res.redirect(url);
+});
+
+
+app.get("/admin", middlewareIsAuth, (req, res) => {
+  //@ts-expect-error - type mismatch
+  res.json(req.session.user);
+});
 
 app.listen(3000, () => console.log('Litenning on port 3000'))
