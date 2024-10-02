@@ -109,7 +109,7 @@ app.get('/callback', async (req, res) => {
 
 app.get("/logout", (req, res) => {
   const logoutParams = new URLSearchParams({
-    //client_id: "fullcycle-client",
+    //client_id: "fullcycle_client",
     //@ts-expect-error
     id_token_hint: req.session.id_token,
     post_logout_redirect_uri: "http://localhost:3000/login",
