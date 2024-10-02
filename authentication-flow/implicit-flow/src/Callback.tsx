@@ -1,17 +1,17 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
-import { login } from "./utils";
+import { AuthContext } from "./AuthProvider";
 
 export function Callback() {
   const { hash } = useLocation();
-  //const { login, auth } = useContext(AuthContext);
+  const { login, auth } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    /* if (auth) {
+    if (auth) {
       navigate("/login");
       return;
-    } */
+    }
 
     const searchParams = new URLSearchParams(hash.replace("#", ""));
     const accessToken = searchParams.get("access_token") as string;
@@ -24,8 +24,7 @@ export function Callback() {
 
     login(accessToken, idToken, state);
 
-  //}, [hash, login, auth, navigate]);
-  }, [hash]);
+  }, [hash, login, auth, navigate]);
 
   return <div>Loading...</div>;
 }

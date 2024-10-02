@@ -1,16 +1,15 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { Navigate } from "react-router-dom"
 import { makeLoginUrl } from "./utils"
+import { AuthContext } from "./AuthProvider"
 
 export function Login() {
-  const authContext = {
-    auth: false
-  }
+  const { auth } = useContext(AuthContext)
 
   useEffect(() => {
-    if (!authContext.auth) {
+    if (!auth) {
       window.location.href = makeLoginUrl()
     }
-  }, [authContext])
-  return authContext.auth ? <Navigate to="/admin" /> : <div>Loading...</div>
+  }, [auth])
+  return auth ? <Navigate to="/admin" /> : <div>Loading...</div>
 }
