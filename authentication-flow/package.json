@@ -6,12 +6,14 @@
     "authorization-code": "npx tsx watch authorization-code-flow/src/index.ts",
     "implicit": "cd implicit-flow && npm run dev",
     "hybrid": "cd hybrid-flow && npm run dev",
+    "resource-owner": "npx tsx watch resource-owner-password-credentials/src/index.ts",
     "build": "npx tsc"
   },
   "keywords": [],
   "workspaces": [
     "implicit-flow",
-    "hybrid-flow"
+    "hybrid-flow",
+    "resource-owner-password-credentials"
   ],
   "author": "",
   "license": "ISC",
